@@ -69,8 +69,12 @@ class ScraperController extends Controller
             {
                 foreach ($blog_title as $key => $value)
                 {
+                    $title_remove_created_at = explode(' - ', $value)[1];
+                    $title_remove_avg_read = str_replace(['read', 'less than', 'min', 'sec'], '', $title_remove_created_at);
+                    $title = substr($title_remove_avg_read, 4);
+
                     $data[] = [
-                        'title' => $value,
+                        'title' => trim($title),
                         'head' => $blog_head[$key],
                         'uri' => $blog_uri[$key]
                     ];
